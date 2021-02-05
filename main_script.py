@@ -1,7 +1,15 @@
 import requests
 try:
-    url = 'http://www.geoplugin.net/currency/php.gp?from=%s&to=%s&amount=%i'
-    response = requests.get( url %('EUR', 'IRR',1))
-    print(response.text)
+    url = 'https://api.lyrics.ovh/v1/%s/%s'
+    key = False
+    while key == False:
+        artist = input("Artist\t : ")
+        title = input("Title\t : ")
+        response = requests.get( url % (artist, title))
+        if (response.json()['lyrics']):
+            print (response.json()['lyrics'])
+            key = True
+        else:
+            print("Not found")
 except:
     raise Exception("error")
